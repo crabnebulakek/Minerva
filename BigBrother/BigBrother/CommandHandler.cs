@@ -24,11 +24,11 @@ namespace BigBrother
         {
             var msg = s as SocketUserMessage;
             if (msg == null) return;
-            Console.WriteLine("[" + msg.CreatedAt + "] " + msg.Author + ": "  + msg.Content);
+            Console.WriteLine("[" + msg.Timestamp + "] #" + msg.Channel + " :> " + msg.Author + ": "  + msg.Content);
             var context = new SocketCommandContext(_client, msg);
 
             int argPos = 0;
-            if(msg.HasCharPrefix('!', ref argPos))
+            if(msg.HasCharPrefix('$', ref argPos))
             {
                 var result = await _service.ExecuteAsync(context, argPos);
                 if(!result.IsSuccess && result.Error != CommandError.UnknownCommand)
